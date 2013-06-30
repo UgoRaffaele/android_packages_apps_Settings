@@ -260,6 +260,7 @@
     <string name="icon_picker_system_icons_title">Ikony systemowe</string>
     <string name="icon_picker_gallery_title">Galeria</string>
     <string name="icon_picker_pack_title">Paczka ikon</string>
+    <string name="icon_picker_contacts">Kontakty</string>
     <string name="increasing_ring_title">Narastający dźwięk dzwonka</string>
     <string name="checkbox_increasing_ring">Włączony</string>
     <string name="increasing_ring_min_volume_title">Początkowa głośność dzwonka</string>
@@ -283,6 +284,7 @@
     <string name="profile_select">Wybierz profil</string>
     <string name="link_volume_ringtones">Połącz głośność dzwonka &amp; powiadomień</string>
     <string name="link_volume_mutes">Tryb cichy wpływa na powiadomienia</string>
+    <string name="volume_keys_control_ring_stream">Przyciski głośności regulują głośność dzwonka</string>
     <string name="notification_pulse_title">Dioda powiadomień</string>
     <string name="notification_light_general_title">Ogólne</string>
     <string name="notification_light_applist_title">Aplikacje</string>
@@ -666,7 +668,7 @@ dwa nowe, odpowiadające kolejnym punktom kontrolnym. \'Usuń\' kasuje wybrany p
     <string name="gestures_double_spen_summary_head">Uruchom własną akcję po dwukrotnym naciśnięciu przycisku</string>
     <string name="gestures_action_empty">Brak akcji</string>
     <string name="gestures_action_home">Emuluj przycisk home</string>
-    <string name="gestures_action_back">Emuluj przycisk wstecz</string>
+    <string name="gestures_action_back">Emuluj przycisk back</string>
     <string name="gestures_action_menu">Emuluj przycisk menu</string>
     <string name="gestures_action_search">Wywołaj wyszukiwarkę</string>
     <string name="gestures_action_recent">Ostatnie aplikacje</string>

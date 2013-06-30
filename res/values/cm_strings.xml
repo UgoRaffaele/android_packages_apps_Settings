@@ -113,7 +113,7 @@
     <string name="mod_version_default">Unknown</string>
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">Build date</string>
-    <string name="build_date_default" translatable="false">2012-01-01-0000</string>
+    <string name="build_date_default" translatable="false">2013-01-01-0000</string>
     <!-- About device screen, Cpu info. -->
     <string name="cpu_info">CPU</string>
     <!-- About phone screen, Free memory info -->
@@ -215,6 +215,11 @@
     <string name="profile_app_delete_confirm">Remove this application?</string>
     <string name="profile_cannot_delete">An active profile cannot be deleted</string>
 
+    <!-- Profile network mode -->
+    <string name="profile_networkmode_2g">2G</string>
+    <string name="profile_networkmode_3g">3G</string>
+    <string name="profile_networkmode_2g3g">2G/3G</string>
+
     <!-- Profile Config screen PreferenceGroup titles -->
     <string name="profile_connectionoverrides_title">Connection overrides</string>
     <string name="profile_volumeoverrides_title">Volume overrides</string>
@@ -236,6 +241,9 @@
     <!-- Profile settings screen, section header for settings related to notification profiles -->
     <string name="profile_settings">Profile settings</string>
     <string name="profile_name">Name</string>
+    <string name="profile_trigger_connect">On connect</string>
+    <string name="profile_trigger_disconnect">On disconnect</string>
+    <string name="profile_trigger_notrigger">No trigger</string>
 
     <!-- Profile Settings sound modes labels -->
     <string name="sound_mode">Notification mode</string>
@@ -295,6 +303,7 @@
     <string name="toggleFlashlight">Flashlight</string>
     <string name="toggleLockScreen">Lock Screen</string>
     <string name="toggleWimax">WiMAX</string>
+    <string name="toggleNfc">NFC</string>
 
     <!-- Screen security - Screen security   -->
     <string name="screen_security_category">Screen security</string>
@@ -442,6 +451,11 @@
     <string name="increasing_ring_interval_5seconds">5 seconds</string>
     <string name="increasing_ring_interval_10seconds">10 seconds</string>
 
+    <string name="profile_trigger_configure">Configure trigger</string>
+    <string name="profile_triggers">Triggers</string>
+    <string name="profile_trigger_filter_all">All triggers</string>
+    <string name="profile_trigger_filter_wifi">Wi-Fi triggers</string>
+    <string name="profile_trigger_filter_bluetooth">Bluetooth triggers</string>
     <string name="profile_write_nfc_tag">Write to NFC tag</string>
     <string name="profile_write_touch_tag">Touch tag to write</string>
     <string name="profile_write_success">Tag successfully written</string>
@@ -655,9 +669,11 @@
     <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
 
     <!-- Wakeup options -->
-    <string name="display_category_wakeup_options_title">Wakeup options</string>
-    <string name="pref_volume_wake_title">Volume rocker wake</string>
-    <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the device</string>
+    <string name="display_category_wakeup_options_title">Wake-up options</string>
+    <string name="pref_home_wake_title">Home button</string>
+    <string name="pref_home_wake_summary">Pressing the home button will wake your device</string>
+    <string name="pref_volume_wake_title">Volume rocker</string>
+    <string name="pref_volume_wake_summary">Pressing the volume rocker up or down will wake your device</string>
 
     <!-- Setting checkbox summary for displaying USB debugging notification -->
     <string name="adb_notify">USB debugging notify</string>
@@ -700,6 +716,7 @@
     <string name="title_tile_battery">Battery stats</string>
     <string name="title_tile_bluetooth">Bluetooth</string>
     <string name="title_tile_brightness">Brightness</string>
+    <string name="title_tile_camera">Camera</string>
     <string name="title_tile_sleep">Go to sleep</string>
     <string name="title_tile_gps">GPS</string>
     <string name="title_tile_torch">Torch</string>
@@ -843,6 +860,13 @@ desired screen brightness. Selecting \'Split\' allows you to to duplicate one li
 two in order to insert additional control points. \'Remove\' deletes the selected line.
     </string>
 
+    <string name="auto_brightness_sensitivity_title">Adjustment sensitivity</string>
+    <string name="auto_brightness_sensitivity_verylow">Very low</string>
+    <string name="auto_brightness_sensitivity_low">Low</string>
+    <string name="auto_brightness_sensitivity_medium">Medium</string>
+    <string name="auto_brightness_sensitivity_high">High</string>
+    <string name="auto_brightness_sensitivity_veryhigh">Very high</string>
+
     <!-- Advanced reboot options -->
     <string name="advanced_reboot_title">Advanced reboot</string>
     <string name="advanced_reboot_summary">When unlocked, include options in the power menu for rebooting into recovery or bootloader</string>
@@ -871,6 +895,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pie_control_title">Pie controls</string>
     <string name="pie_control_enabled">Floating controls when Expanded desktop is enabled</string>
     <string name="pie_control_disabled">Floating controls disabled</string>
+    <string name="pie_control_sensitivity_title">Responsiveness</string>
+    <string name="pie_control_sensitivity_low">Low</string>
+    <string name="pie_control_sensitivity_medium">Medium</string>
+    <string name="pie_control_sensitivity_high">High</string>
+    <string name="pie_control_sensitivity_very_high">Very high</string>
     <string name="pie_control_size">Navigation key size</string>
     <string name="pie_control_trigger_positions">Trigger positions</string>
     <string name="pie_control_trigger_left">Left screen border</string>
@@ -883,8 +912,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="gestures_settings_title">Stylus gestures</string>
     <string name="category_spen_title">Stylus gestures</string>
     <string name="enable_subcat_title">Stylus</string>
-    <string name="enable_spen_title_head">Enable stylus gestures</string>
-    <string name="enable_spen_summary_head">Launch custom actions with stylus button swipe gestures. Warning: apps will not be able to receive input fired by holding the stylus button</string>
+    <string name="enable_spen_title_head">Enable gestures</string>
+    <string name="enable_spen_summary_head">Use swipe gestures by holding down the stylus button</string>
     <string name="gestures_subcat_title">Gestures</string>
     <string name="gestures_left_spen_title_head">Left swipe</string>
     <string name="gestures_left_spen_summary_head">Launch custom action on left swipe</string>
@@ -901,9 +930,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Gestures Options -->
     <string name="gestures_action_empty">No action</string>
-    <string name="gestures_action_home">Emulate home key</string>
-    <string name="gestures_action_back">Emulate back key</string>
-    <string name="gestures_action_menu">Emulate menu key</string>
+    <string name="gestures_action_home">Home</string>
+    <string name="gestures_action_back">Back</string>
+    <string name="gestures_action_menu">Menu</string>
     <string name="gestures_action_search">Invoke search</string>
     <string name="gestures_action_recent">Recent apps</string>
 
@@ -915,16 +944,32 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="wifi_channel">Channel</string>
     <string name="wifi_mhz">MHz</string>
 
-    <!-- Category title for power sound notification specific Settings.
+    <!-- Category title for Charging sounds (Power state change) specific Settings.
          [CHAR LIMIT=40] -->
-    <string name="power_notifications_category_title">Power sounds</string>
+    <string name="power_notifications_category_title">Charging sounds</string>
 
-    <!-- Sound settings, power notifications enable/disable, setting check box label -->
+    <!-- Sound settings, Charging sounds enable/disable, setting check box label -->
     <string name="power_notifications_enable_title">Enable</string>
-    <!-- Sound settings, power notifications vibrate enable/disable, setting check box label -->
+    <string name="power_notifications_enable_summary">Play a sound when connecting or disconnecting the charger</string>
+    <!-- Sound settings, Charging sounds vibrate enable/disable, setting check box label -->
     <string name="power_notifications_vibrate_title">Vibrate</string>
-    <!-- Sound settings, power notifications ringtone selection, preference label -->
+    <!-- Sound settings, Charging sounds ringtone selection, preference label -->
     <string name="power_notifications_ringtone_title">Notification sound</string>
-    <!-- Sound settings, power notifications label for ringtone == none -->
+    <!-- Sound settings, charging sounds label for ringtone == none -->
     <string name="power_notifications_ringtone_silent">Silent</string>
+
+    <!-- Display Screen-on and off Electron beam animations -->
+    <string name="screen_off_animation_title">Screen-off animation</string>
+    <string name="screen_off_animation_summary">Show the electron beam animation when the screen is turned off</string>
+
+    <!-- Delete apn confirmation dialog message -->
+    <string name="confirm_delete_apn">The APN will be deleted.</string>
+
+    <!-- Privacy Guard -->
+    <string name="privacy_guard_switch_label">Enable Privacy Guard</string>
+    <string name="privacy_guard_dlg_title">Enable Privacy Guard?</string>
+    <string name="privacy_guard_dlg_text">When Privacy Guard is enabled, the app will not be able to access personal data such as contacts, messages, or call logs.</string>
+    <string name="privacy_guard_default_title">Privacy Guard</string>
+    <string name="privacy_guard_default_summary">Enable Privacy Guard by default for newly-installed apps</string>
+
 </resources>
