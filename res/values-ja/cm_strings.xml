@@ -34,7 +34,6 @@
     <string name="adb_notify_summary">USBデバッグが接続されたときに通知する</string>
     <string name="link_volume_ringtones">"着信音と同じ音量にする"</string>
     <string name="link_volume_mutes">"ミュート状態をリンクさせる"</string>
-    <string name="volume_keys_control_ring_stream">ボリュームキーで着信音量を制御する</string>
     <string name="icon_picker_search">検索</string>
     <string name="icon_picker_google_small">Google (小)</string>
     <string name="accessibility_home_button_answers_call_prerefence_title">ホームボタンで着信に応答</string>
@@ -46,7 +45,6 @@
     <string name="icon_picker_browser">ブラウザ</string>
     <string name="icon_picker_calendar">カレンダー</string>
     <string name="icon_picker_camera">カメラ</string>
-    <string name="icon_picker_contacts">連絡先</string>
     <string name="icon_picker_email">Eメール</string>
     <string name="icon_picker_email2">Eメール Holo</string>
     <string name="icon_picker_facebook">Facebook</string>

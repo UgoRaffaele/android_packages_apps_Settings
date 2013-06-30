@@ -16,7 +16,6 @@
 
 package com.android.settings.cmstats;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -24,26 +23,54 @@ import android.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class PreviewData extends SettingsPreferenceFragment {
+public class PreviewData extends SettingsPreferenceFragment
+    implements Preference.OnPreferenceChangeListener{
+
     private static final String UNIQUE_ID = "preview_id";
+
     private static final String DEVICE = "preview_device";
+
     private static final String VERSION = "preview_version";
+
     private static final String COUNTRY = "preview_country";
+
     private static final String CARRIER = "preview_carrier";
+
+    private Preference mId;
+
+    private Preference mDevice;
+
+    private Preference mVersion;
+
+    private Preference mCountry;
+
+    private Preference mCarrier;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.preview_data);
+        if (getPreferenceManager() != null) {
 
-        final PreferenceScreen prefSet = getPreferenceScreen();
-        final Context context = getActivity();
+            addPreferencesFromResource(R.xml.preview_data);
+            PreferenceScreen prefSet = getPreferenceScreen();
 
-        prefSet.findPreference(UNIQUE_ID).setSummary(Utilities.getUniqueID(context));
-        prefSet.findPreference(DEVICE).setSummary(Utilities.getDevice());
-        prefSet.findPreference(VERSION).setSummary(Utilities.getModVersion());
-        prefSet.findPreference(COUNTRY).setSummary(Utilities.getCountryCode(context));
-        prefSet.findPreference(CARRIER).setSummary(Utilities.getCarrier(context));
+            mId = (Preference) prefSet.findPreference(UNIQUE_ID);
+            mDevice = (Preference) prefSet.findPreference(DEVICE);
+            mVersion = (Preference) prefSet.findPreference(VERSION);
+            mCountry = (Preference) prefSet.findPreference(COUNTRY);
+            mCarrier = (Preference) prefSet.findPreference(CARRIER);
+
+            mId.setSummary(Utilities.getUniqueID(getActivity().getApplicationContext()));
+            mDevice.setSummary(Utilities.getDevice());
+            mVersion.setSummary(Utilities.getModVersion());
+            mCountry.setSummary(Utilities.getCountryCode(getActivity().getApplicationContext()));
+            mCarrier.setSummary(Utilities.getCarrier(getActivity().getApplicationContext()));
+        }
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        return false;
     }
 }

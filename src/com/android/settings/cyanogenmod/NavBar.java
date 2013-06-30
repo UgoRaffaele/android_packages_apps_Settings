@@ -50,6 +50,7 @@ public class NavBar extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = activity;
+        mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
@@ -146,11 +147,6 @@ public class NavBar extends Fragment {
         if (mEditMenu != null) {
             mEditMenu.setTitle(on ? R.string.navigation_bar_menu_editable :  R.string.navigation_bar_menu_locked)
             .setIcon(on ? R.drawable.stat_navbar_edit_on : R.drawable.stat_navbar_edit_off);
-        }
-        if (on) {
-            Utils.lockCurrentOrientation(mActivity);
-        } else {
-            mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 }

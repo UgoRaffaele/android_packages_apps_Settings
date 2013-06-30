@@ -52,6 +52,7 @@
     <string name="mod_version">CyanogenMod-Version</string>
     <string name="mod_version_default">Unbekannt</string>
     <string name="build_date">Build-Datum</string>
+    <string name="build_date_default">01-01-2013-0000</string>
     <string name="cpu_info">Prozessor</string>
     <string name="mem_info">Arbeitsspeicher</string>
     <string name="anonymous_statistics_title">Anonyme Statistiken</string>
@@ -172,7 +173,6 @@
     <string name="toggleFlashlight">Taschenlampe</string>
     <string name="toggleLockScreen">Bildschirmsperre</string>
     <string name="toggleWimax">WiMAX</string>
-    <string name="toggleNfc">NFC</string>
     <string name="screen_security_category">Bildschirmsicherheit</string>
     <string name="screen_security_title">Sicherheitssperre</string>
     <string name="screen_security_summary">Einstellungen zur Sicherheitssperre, Timeouts und Abschaltverzögerungen anzeigen und ändern</string>
@@ -334,7 +334,6 @@
     <string name="link_volume_ringtones">Gleiche Lautstärke für Klingelton und Benachrichtigungen</string>
     <string name="link_volume_mutes">Klingelton und Benachrichtigungen gemeinsam stummschalten</string>
     <string name="volume_keys_control_ring_stream">Lautstärketasten steuern Benachrichtigungslautstärke</string>
-    <string name="volume_keys_control_ring_stream">Lautstärketasten steuern Klingeltonlautstärke</string>
     <string name="hardware_keys_title">Hardware-Tasten</string>
     <string name="hardware_keys_bindings_title">Tastenaktionen</string>
     <string name="hardware_keys_enable_custom_title">Benutzerdefinierte Aktionen aktivieren</string>
@@ -525,10 +524,10 @@
     <string name="summary_collapse_panel">Schnelleinstellungen nach Auswahl automatisch schließen</string>
     <string name="tiles_reset_title">Zurücksetzen</string>
     <string name="tiles_reset_message">Auf Standard zurücksetzen?</string>
-    <string name="volume_key_cursor_control_title">Cursorsteuerung mit Lautstärketasten</string>
+    <string name="volume_key_cursor_control_title">Cursorsteuerung mit Lautstärkewippe</string>
     <string name="volume_key_cursor_control_off">Deaktiviert</string>
-    <string name="volume_key_cursor_control_on">Lauter-/Leiser-Taste bewegt den Cursor nach links/rechts</string>
-    <string name="volume_key_cursor_control_on_reverse">Lauter-/Leiser-Taste bewegt den Cursor nach rechts/links</string>
+    <string name="volume_key_cursor_control_on">Lautstärkewippe oben/unten bewegt den Cursor nach links/rechts</string>
+    <string name="volume_key_cursor_control_on_reverse">Lautstärkewippe oben/unten bewegt den Cursor nach rechts/links</string>
     <string name="wifi_setting_countrycode_title">Ländercode</string>
     <string name="wifi_setting_countrycode_summary">WLAN-Ländercode festlegen</string>
     <string name="wifi_setting_countrycode_error">Beim Festlegen des WLAN-Ländercodes ist ein Problem aufgetreten.</string>
@@ -618,16 +617,10 @@ Bildschirmhelligkeitswert manuell eingegeben werden. Die Auswahl von \"Helligkei
 erlaubt die Duplizierung einer Zeile in eine zweite Zeile, um zusätzliche Stützstellen hinzuzufügen.
 Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverlauf entfernt werden.
     </string>
-    <string name="auto_brightness_sensitivity_title">Regelungsträgheit</string>
-    <string name="auto_brightness_sensitivity_verylow">Sehr träge</string>
-    <string name="auto_brightness_sensitivity_low">Träge</string>
-    <string name="auto_brightness_sensitivity_medium">Normal</string>
-    <string name="auto_brightness_sensitivity_high">Flink</string>
-    <string name="auto_brightness_sensitivity_veryhigh">Sehr flink</string>
     <string name="advanced_reboot_title">Erweitertes Neustartmenü</string>
     <string name="advanced_reboot_summary">Bei entsperrtem Bildschirm dem Neustartmenü Optionen für Neustart in Recovery und Bootloader hinzufügen</string>
     <string name="volume_adjust_sounds_enable_title">Änderungston</string>
-    <string name="volume_adjust_sounds_enable_summary">Beim Anpassen der Lautstärke mit den Lautstärketasten einen Ton abspielen</string>
+    <string name="volume_adjust_sounds_enable_summary">Beim Anpassen der Lautstärke mit der Lautstärkewippe einen Ton abspielen</string>
     <string name="lockpattern_settings_enable_error_path_title">Fehler anzeigen</string>
     <string name="lockpattern_settings_enable_dots_title">Punkte anzeigen</string>
     <string name="navigation_bar_category">Navigationsleiste</string>
@@ -650,17 +643,16 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="pie_control_enabled">Ist bei erweitertem Desktop aktiviert</string>
     <string name="pie_control_disabled">Deaktiviert</string>
     <string name="pie_control_size">Größe der Navigationstasten</string>
-    <string name="pie_control_sensitivity_title">Empfindlichkeit</string>
-    <string name="pie_control_sensitivity_low">Niedrig</string>
-    <string name="pie_control_sensitivity_medium">Normal</string>
-    <string name="pie_control_sensitivity_high">Hoch</string>
-    <string name="pie_control_sensitivity_very_high">Sehr hoch</string>
     <string name="pie_control_trigger_positions">Ansteuerungsposition</string>
     <string name="pie_control_trigger_left">Linker Bildschirmrand</string>
     <string name="pie_control_trigger_bottom">Unterer Bildschirmrand</string>
     <string name="pie_control_trigger_right">Rechter Bildschirmrand</string>
     <string name="pie_control_trigger_top">Oberer Bildschirmrand</string>
     <string name="pie_control_trigger_top_summary">Es werden nur die Navigationstasten angezeigt</string>
+    <string name="lock_pattern_size_3">3x3</string>
+    <string name="lock_pattern_size_4">4x4</string>
+    <string name="lock_pattern_size_5">5x5</string>
+    <string name="lock_pattern_size_6">6x6</string>
     <string name="wifi_mode">Modus</string>
     <string name="wifi_mode_ibss">Ad-Hoc-Netzwerk (IBSS)</string>
     <string name="wifi_mode_ibss_short">Ad-Hoc</string>

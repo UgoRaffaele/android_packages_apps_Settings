@@ -123,12 +123,11 @@ public class ProfileConnectionPreference extends Preference implements
     protected Dialog createConnectionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final String[] ConnectionValues = getContext().getResources().getStringArray(R.array.profile_connection_values);
-        final String[] connectionNames = getContext().getResources().getStringArray(mConnectionItem.mChoices);
 
         currentChoice = mConnectionItem.mSettings.getValue();
 
         builder.setTitle(mConnectionItem.mLabel);
-        builder.setSingleChoiceItems(mConnectionItem.mChoices, currentChoice, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(R.array.profile_connection_entries, currentChoice, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 currentChoice = item;
@@ -141,7 +140,8 @@ public class ProfileConnectionPreference extends Preference implements
                 if (currentChoice != defaultChoice) {
                     int value = Integer.parseInt(ConnectionValues[currentChoice]);
                     mConnectionItem.mSettings.setValue(value);
-                    setSummary(connectionNames[value]);
+                    setSummary(value == 1 ? getContext().getString(R.string.connection_state_enabled) 
+                            : getContext().getString(R.string.connection_state_disabled));
                 }
             }
         });

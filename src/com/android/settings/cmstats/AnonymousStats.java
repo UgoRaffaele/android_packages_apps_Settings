@@ -18,6 +18,7 @@ package com.android.settings.cmstats;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,38 +32,36 @@ import android.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class AnonymousStats extends SettingsPreferenceFragment implements
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
+public class AnonymousStats extends SettingsPreferenceFragment
+        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         Preference.OnPreferenceChangeListener {
+
     private static final String VIEW_STATS = "pref_view_stats";
 
-    private static final String PREF_FILE_NAME = "CMStats";
-    /* package */ static final String ANONYMOUS_OPT_IN = "pref_anonymous_opt_in";
-    /* package */ static final String ANONYMOUS_LAST_CHECKED = "pref_anonymous_checked_in";
+    protected static final String ANONYMOUS_OPT_IN = "pref_anonymous_opt_in";
+
+    protected static final String ANONYMOUS_LAST_CHECKED = "pref_anonymous_checked_in";
 
     private CheckBoxPreference mEnableReporting;
+
     private Preference mViewStats;
 
     private Dialog mOkDialog;
+
     private boolean mOkClicked;
 
     private SharedPreferences mPrefs;
 
-    public static SharedPreferences getPreferences(Context context) {
-        return context.getSharedPreferences(PREF_FILE_NAME, 0);
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.anonymous_stats);
-
-        mPrefs = getPreferences(getActivity());
-
-        PreferenceScreen prefSet = getPreferenceScreen();
-        mEnableReporting = (CheckBoxPreference) prefSet.findPreference(ANONYMOUS_OPT_IN);
-        mViewStats = (Preference) prefSet.findPreference(VIEW_STATS);
+        if (getPreferenceManager() != null) {
+            addPreferencesFromResource(R.xml.anonymous_stats);
+            PreferenceScreen prefSet = getPreferenceScreen();
+            mPrefs = getActivity().getSharedPreferences("CMStats", 0);
+            mEnableReporting = (CheckBoxPreference) prefSet.findPreference(ANONYMOUS_OPT_IN);
+            mViewStats = (Preference) prefSet.findPreference(VIEW_STATS);
+        }
     }
 
     @Override
@@ -73,13 +72,14 @@ public class AnonymousStats extends SettingsPreferenceFragment implements
                 mOkClicked = false;
                 if (mOkDialog != null) {
                     mOkDialog.dismiss();
+                    mOkDialog = null;
                 }
-                mOkDialog = new AlertDialog.Builder(getActivity())
-                        .setMessage(R.string.anonymous_statistics_warning)
+                mOkDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                        getActivity().getResources().getString(R.string.anonymous_statistics_warning))
                         .setTitle(R.string.anonymous_statistics_warning_title)
                         .setIconAttribute(android.R.attr.alertDialogIcon)
                         .setPositiveButton(android.R.string.yes, this)
-                        .setNeutralButton(R.string.anonymous_learn_more, this)
+                        .setNeutralButton(getString(R.string.anonymous_learn_more), this)
                         .setNegativeButton(android.R.string.no, this)
                         .show();
                 mOkDialog.setOnDismissListener(this);
@@ -89,7 +89,7 @@ public class AnonymousStats extends SettingsPreferenceFragment implements
             }
         } else if (preference == mViewStats) {
             // Display the stats page
-            Uri uri = Uri.parse("http://stats.cyanogenmod.org");
+            Uri uri = Uri.parse("http://stats.cyanogenmod.com");
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         } else {
             // If we didn't handle it, let preferences handle it.
@@ -116,11 +116,12 @@ public class AnonymousStats extends SettingsPreferenceFragment implements
             mOkClicked = true;
             mPrefs.edit().putBoolean(ANONYMOUS_OPT_IN, true).apply();
             ReportingServiceManager.launchService(getActivity());
-        } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+        } else if (which == DialogInterface.BUTTON_NEGATIVE){
             mEnableReporting.setChecked(false);
         } else {
-            Uri uri = Uri.parse("http://www.cyanogenmod.org/blog/cmstats-what-it-is-and-why-you-should-opt-in");
+            Uri uri = Uri.parse("http://www.cyanogenmod.com/blog/cmstats-what-it-is-and-why-you-should-opt-in");
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
     }
+
 }

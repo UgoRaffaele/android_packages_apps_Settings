@@ -26,13 +26,11 @@ import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
-import android.app.INotificationManager; 
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -55,23 +53,14 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
-    private static final String KEY_HALO_STATE = "halo_state";
-    private static final String KEY_HALO_HIDE = "halo_hide";
-    private static final String KEY_HALO_REVERSED = "halo_reversed";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
-    private ListPreference mHaloState;
-    private CheckBoxPreference mHaloHide;
-    private CheckBoxPreference mHaloReversed;
 
     private boolean mIsPrimary;
-
-	private Context mContext;
-    private INotificationManager mNotificationManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,18 +69,10 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         addPreferencesFromResource(R.xml.system_settings);
         PreferenceScreen prefScreen = getPreferenceScreen();
 
-		mContext = getActivity();
-
-		mNotificationManager = INotificationManager.Stub.asInterface(
-        		ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-
         // Only show the hardware keys config on a device that does not have a navbar
         // and the navigation bar config on phones that has a navigation bar
         boolean removeKeys = false;
         boolean removeNavbar = false;
-
-        PreferenceCategory navbarCategory =
-                (PreferenceCategory) findPreference(KEY_NAVIGATION_BAR_CATEGORY);
 
         IWindowManager windowManager = IWindowManager.Stub.asInterface(
                 ServiceManager.getService(Context.WINDOW_SERVICE));
@@ -103,13 +84,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             }
         } catch (RemoteException e) {
             // Do nothing
-        }
-
-        if (removeKeys) {
-            prefScreen.removePreference(findPreference(KEY_HARDWARE_KEYS));
-        }
-        if (removeNavbar) {
-            prefScreen.removePreference(navbarCategory);
         }
 
         // Determine which user is logged in
@@ -125,9 +99,32 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
                     mBatteryPulse = null;
                 }
             }
+
+            // Act on the above
+            if (removeKeys) {
+                prefScreen.removePreference(findPreference(KEY_HARDWARE_KEYS));
+            }
+            if (removeNavbar) {
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
+                prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_CATEGORY));
+            }
         } else {
             // Secondary user is logged in, remove all primary user specific preferences
             prefScreen.removePreference(findPreference(KEY_BATTERY_LIGHT));
+            prefScreen.removePreference(findPreference(KEY_HARDWARE_KEYS));
+            prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR));
+            prefScreen.removePreference(findPreference(KEY_NAVIGATION_RING));
+            // move pie controls from the navigation bar category to the root preference
+            mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
+            if (mPieControl != null) {
+                prefScreen.addPreference(mPieControl);
+            }
+            prefScreen.removePreference(findPreference(KEY_NAVIGATION_BAR_CATEGORY));
+            prefScreen.removePreference(findPreference(KEY_STATUS_BAR));
+            prefScreen.removePreference(findPreference(KEY_QUICK_SETTINGS));
+            prefScreen.removePreference(findPreference(KEY_POWER_MENU));
+            prefScreen.removePreference(findPreference(KEY_NOTIFICATION_DRAWER));
         }
 
         // Preferences that applies to all users
@@ -147,18 +144,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             prefScreen.removePreference(mPieControl);
             mPieControl = null;
         }
-
-		mHaloState = (ListPreference) prefScreen.findPreference(KEY_HALO_STATE);
-        mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
-        mHaloState.setOnPreferenceChangeListener(this);
-
-		mHaloHide = (CheckBoxPreference) prefScreen.findPreference(KEY_HALO_HIDE);
-        mHaloHide.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_HIDE, 0) == 1);
-
-        mHaloReversed = (CheckBoxPreference) prefScreen.findPreference(KEY_HALO_REVERSED);
-        mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_REVERSED, 1) == 1);
 
         // Expanded desktop
         mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
@@ -219,14 +204,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             boolean value = (Boolean) objValue;
             updateExpandedDesktop(value ? 2 : 0);
             return true;
-		} else if (preference == mHaloState) {
-            boolean state = Integer.valueOf((String) newValue) == 1;
-            try {
-                mNotificationManager.setHaloPolicyBlack(state);
-            } catch (android.os.RemoteException ex) {
-                // System dead
-            }          
-            return true;
         }
 
         return false;
@@ -256,33 +233,6 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
             mPieControl.setSummary(getString(R.string.pie_control_enabled));
         } else {
             mPieControl.setSummary(getString(R.string.pie_control_disabled));
-        }
-    }
-
-	private boolean isHaloPolicyBlack() {
-        try {
-            return mNotificationManager.isHaloPolicyBlack();
-        } catch (android.os.RemoteException ex) {
-                // System dead
-        }
-        return true;
-    } 
-
-    private void updateHaloHideDescription() {
-        if (Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.HALO_HIDE, 0) == 1) {
-            mHaloHide.setSummary(getString(R.string.halo_hide_enabled));
-        } else {
-            mHaloHide.setSummary(getString(R.string.halo_hide_disabled));
-        }
-    }
-
-    private void updateHaloInversedDescription() {
-        if (Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.HALO_HIDE, 0) == 1) {
-            mHaloHide.setSummary(getString(R.string.halo_hide_enabled));
-        } else {
-            mHaloHide.setSummary(getString(R.string.halo_hide_disabled));
         }
     }
 

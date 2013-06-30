@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="volume_overlay_entries">
         <item>Enkelvoudig</item>
@@ -72,3 +73,4 @@
         <item>Brazilië</item>
     </string-array>
 </resources>
+
